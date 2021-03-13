@@ -52,4 +52,15 @@ public class PlayerMovement : MonoBehaviour
             canJump = false;
         }
     }
+    void OnCollisionEnter(Collision hit)
+    {
+        if (hit.gameObject.CompareTag("Wall"))
+        {
+            canJump = false;
+        }
+        else
+        {
+            canJump = true;
+        }
+    }
 }
