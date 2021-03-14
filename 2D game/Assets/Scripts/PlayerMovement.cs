@@ -9,21 +9,33 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed, maxSpeed, jumpForce;
     [SerializeField] private Collider2D groundCheck;
     [SerializeField] private LayerMask groundLayers;
+    [SerializeField] private bool cancelJumpEnabled;
 
     private float moveDir;
     private Rigidbody2D myRB;
     private bool canJump;
+    private SpriteRenderer mySprite;
 
     private void Start()
     {
         myRB = GetComponent<Rigidbody2D>();
+        mySprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void FixedUpdate()
     {
+        if (moveDir > 0)
+        {
+            mySprite.flipX = false;
+        }
+
+        if (moveDir < 0)
+        {
+            mySprite.flipX = true;
+        }
         var moveAxis = Vector3.right * moveDir;
 
-        if (-maxSpeed < myRB.velocity.x && myRB.velocity.x < maxSpeed)
+        if (Mathf.Abs(myRB.velocity.x) < maxSpeed)
         {
             myRB.AddForce(moveAxis * moveSpeed, ForceMode2D.Force);
         }
@@ -44,23 +56,25 @@ public class PlayerMovement : MonoBehaviour
         moveDir = context.ReadValue<float>();
     }
 
+    public void Move(float moveAmt)
+    {
+        moveDir = moveAmt;
+    }
+
     public void Jump(InputAction.CallbackContext context)
     {
         if (canJump)
         {
-            myRB.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
-            canJump = false;
+            if (context.started)
+            {
+                myRB.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
+                canJump = false;
+            }
         }
-    }
-    void OnCollisionEnter(Collision hit)
-    {
-        if (hit.gameObject.CompareTag("Wall"))
+
+        if (context.canceled && cancelJumpEnabled)
         {
-            canJump = false;
-        }
-        else
-        {
-            canJump = true;
+            myRB.velocity = new Vector2(myRB.velocity.x, 0f);
         }
     }
 }
