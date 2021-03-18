@@ -53753,7 +53753,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &691269778
 RectTransform:
   m_ObjectHideFlags: 0
@@ -53768,10 +53768,10 @@ RectTransform:
   m_Father: {fileID: 1352142658}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.3125, y: 13.75}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -200.3125, y: 13.75}
+  m_SizeDelta: {x: 600, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &691269779
 MonoBehaviour:
@@ -53795,9 +53795,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Controls: WASD
 
-    Enemies are invincible,
-
-    so watch out!'
+    Kill enemies by jumping on them.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -53824,8 +53822,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 13.38
+  m_fontSizeBase: 13.38
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
